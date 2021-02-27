@@ -1,12 +1,13 @@
 import './App.css';
-
-import Register from './components/Register'
+import Header from './components/Header'
+import Homepage from './components/Homepage'
 
 
 function App() {
   return (
     <div className="App">
-      <Register/>
+      <Header/>
+      <Homepage/>
     </div>
   );
 }

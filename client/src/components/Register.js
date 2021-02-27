@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import {Button,TextField,InputAdornment,Input,IconButton} from '@material-ui/core'
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function Register() {
 	const [ fullname, setFullname ] = useState();
 	const [ username, setUsername ] = useState();
-	const [ password, setPassword ] = useState();
-	const [ confirmpassword, setConfirmPassword ] = useState();
+    const [ password, setPassword ] = useState();
+    const [ confirmpassword, setConfirmPassword ] = useState();
+    const [flag,setFlag]=useState(false);
 
 	const onSubmitForm = async (event) => {
         event.preventDefault();
-        console.log("enterd");
         const data={fullname:fullname,username:username,password:password,confirmpassword:confirmpassword}
         const response=await fetch("http://localhost:5000/register",{
             method:"POST",
@@ -17,24 +20,33 @@ export default function Register() {
         });
         console.log(response);
 
-	};
+    };
+    const handleShowPassword=(event)=>{
+        setFlag(true);
+    }
 	return (
 
 		<div>
-			<form onSubmit={onSubmitForm}>
+			<form>
 				<div>
-					<input  name="fullname" placeholder="Full Name" onChange={event=>setFullname(event.target.value)}/>
+					<TextField  name="fullname" placeholder="Full Name" onChange={event=>setFullname(event.target.value)}/>
 				</div>
 				<div>
-					<input  name="username" placeholder="User name" onChange={event=>setUsername(event.target.value)} />
+					<TextField  name="username" placeholder="User name" onChange={event=>setUsername(event.target.value)} />
 				</div>
 				<div>
-					<input  name="password" placeholder="Password" onChange={event=>setPassword(event.target.value)} />
-				</div>
+					<Input  type="password"  placeholder="Password" onChange={event=>setPassword(event.target.value)} endAdornment={
+                        <InputAdornment position="end">
+                        <IconButton  onClick={handleShowPassword} edge="end">
+                            {flag ? <Visibility/> : <VisibilityOff/>}
+                        </IconButton>
+                        </InputAdornment>
+                    }></Input>
+			</div>
 				<div>
-					<input  name="confirmpassword" placeholder="Confirm Password" onChange={event=>setConfirmPassword(event.target.value)} />
+					<TextField  type="password" name="confirmpassword" placeholder="Confirm Password" onChange={event=>setConfirmPassword(event.target.value)} />
 				</div>
-				<button>Register</button>
+				<Button color="primary" onClick={onSubmitForm}>Register</Button>
 			</form>
 		</div>
 	);

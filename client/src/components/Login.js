@@ -7,14 +7,19 @@ export default function Login() {
     const onSubmit=async (event)=>{
         event.preventDefault();
         const response=await fetch('http://localhost:5000/login');
-        
+
     }
     return (
         <div>
-            <form onSubmit={onSubmit}>
-            <input type="text" onChange={event=>setUsername(event.target.value)}/>
-            <input type="text" onChange={event=>setPassword(event.target.value)}/>
+            <form class="login" onSubmit={onSubmit}>
+            <div>
+            <input type="text"  placeholder="Username" onChange={event=>setUsername(event.target.value)}/>
+            </div>
+            <div>
+            <input type="text"  placeholder="Password" onChange={event=>setPassword(event.target.value)}/>
             <button >Login</button>
+            </div>
+           
             </form>
         </div>
     )
