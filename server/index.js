@@ -1,7 +1,7 @@
 const express=require('express');
 const cors=require('cors');
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://Shrey:root@cluster0.649e8.mongodb.net/User?retryWrites=true&w=majority";
+const uri = process.env.MongoDB_URI;
 // const client=require('./db');
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
